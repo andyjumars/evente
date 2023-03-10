@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>如何獲取事件對象</title>
+    <style type="text/css">
+        #box {
+            width: 300px;
+            height:100px;
+            background-color:orange;
+        }
+    
+    </style>
+</head>
+<body>
+    <a href="javascript:void(0);"></a>
+    <div id="box"></div>
+    <script type="text/javascript">
+// 1.如何獲取事件對象
+// 2.事件目標
+// 3.事件代理
+// 4.事件冒泡
+// 5.事件流階段eventPhase
+// 6. 取消默認事件 ex:<a href="javascript:void(0);"></a>
+
+//兼容性
+window.onload = function(){
+    var box = document.getElementById('box');
+}
+// 1.event對像是事件處理程序的第一個參數ie8瀏覽器不包含
+// ie8瀏覽器得到的結果是undefined,其瀏覽器[object MouseEvent]
+/* box.onclick = function (e){
+this.innerHTML = e;
+
+} */
+// 2.直接可以使用事件變量火狐瀏覽器低版本獲取出來的是undefined
+/* box.onclick = function() {
+this.innerHTML = 事件；
+} */
+
+// 兼容性代碼
+box.onclick = function(){
+    console.log(e);
+    e = e || window.event;
+    box.innerHTML = e;
+}
+</script>
+</body>
+</html>
